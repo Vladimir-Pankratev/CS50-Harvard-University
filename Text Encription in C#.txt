@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <cs50.h>
+#include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
+
+
+//Encription of a text by provided from a user encription key 't'
+int t;
+
+int main(int argc, string argv[])
+{
+
+//Checking the inputs
+    
+    if (argc == 2)
+    {
+        string s = (argv[1]);
+        for (int i = 0, n = strlen(s); i < n; i++)
+        {
+            if (isdigit(s[i]) == 0)
+            {
+                printf("Usage: ./caesar key\n");
+                return (1);
+            }
+            
+        }
+        
+        //converting the encription key into an integer
+        t = atoi(s);
+    }
+    else
+    {
+        printf("Usage: ./caesar key\n");
+        return (1);
+    }
+    
+//The encription part 
+   
+    //Require a text 
+    string plaintext = get_string("plaintext: ");
+    printf("ciphertext: ");
+    
+    //Encripting characters one by one 
+    for (int i = 0, n = strlen(plaintext); i < n; i++)
+    {
+        if (isalpha(plaintext[i]) != 0 && isupper(plaintext[i]) != 0) 
+        {
+            int p = (plaintext[i] - 65);
+            char c = ((p + t) % 26);
+            printf("%c", c + 65);
+        }
+        else if (isalpha(plaintext[i]) != 0 && islower(plaintext[i]) != 0)
+        {
+            int p = (plaintext[i] - 97);
+            char c = ((p + t) % 26);
+            printf("%c", c + 97);
+        }
+        else
+        {
+            printf("%c", plaintext[i]);
+        }
+    }
+    printf("\n");
+}
